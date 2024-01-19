@@ -1,16 +1,29 @@
 {
+<<<<<<< HEAD
   "name": "react-props-practice-completed",
+=======
+  "name": "react-props-practice",
+>>>>>>> 9f56a514a4a51488c793400448c9904e2ec24892
   "version": "1.0.0",
   "description": "",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+<<<<<<< HEAD
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-scripts": "3.2.0"
   },
   "devDependencies": {
     "typescript": "3.3.3"
+=======
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "typescript": "5.3.3"
+>>>>>>> 9f56a514a4a51488c793400448c9904e2ec24892
   },
   "scripts": {
     "start": "react-scripts start",
