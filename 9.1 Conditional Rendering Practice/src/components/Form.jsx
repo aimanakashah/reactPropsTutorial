@@ -1,15 +1,16 @@
 import React from "react";
+// import App from "./App";
 
 function Form(props) {
   return (
-    <input type={props.text} placeholder={props.placeholder} />
-
-    // <form className="form">
-    //   <input type="text" placeholder="Username" />
-    //   <input type="password" placeholder="Password" />
-    //   <input type="password" placeholder="Confirm Password" />
-    //   <button type="submit">Register</button>
-    // </form>
+    <form className="form">
+      <input type="text" placeholder="Username" />
+      <input type="password" placeholder="Password" />
+      {!props.isRegistered && (
+        <input type="password" placeholder="Confirm Password" />
+      )}
+      <button type="submit">{props.isRegistered ? "Login" : "Register"}</button>
+    </form>
   );
 }
 
