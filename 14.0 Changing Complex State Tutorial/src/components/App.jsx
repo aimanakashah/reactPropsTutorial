@@ -26,8 +26,8 @@ function App() {
     //METHOD BELOW GIVES OUT ERROR EXPECTING AN ASSIGNMENT OR FUNCTION CALL BUT INSTEAD SAW AN EXPRESSION
     // setFullName((prevValue) => {
     //   name === "fName"
-    //     ? { lName: prevValue, fName: value }
-    //     : { fName: prevValue, lName: value };
+    //     ? { lName: prevValue.lName, fName: value }
+    //     : { fName: prevValue.fName, lName: value };
     // });
   }
 
