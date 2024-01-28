@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 function App() {
+  //array destructuring to extract elements from array-like structure
   const [contact, setContact] = useState({
     fName: "",
     lName: "",
@@ -8,7 +9,8 @@ function App() {
   });
 
   function handleChange(event) {
-    const { name, value } = event.target;
+    const { name, value } = event.target; //using this syntax to destructure an object (event.target) to extract the properties {name, value}
+
     setContact((prevValue) => {
       if (name === "fName") {
         return { fName: value, lName: prevValue.lName, email: prevValue.email };
