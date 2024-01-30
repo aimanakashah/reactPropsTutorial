@@ -1,58 +1,40 @@
 import React, { useState } from "react";
-import Index from "./Index";
 
 function App() {
-  const [inputValue, setInputValue] = useState("");
-  const [lists, setList] = useState([]);
-
-  function createList(lists) {
-    return <Index key={lists.key} value={lists.note} />;
-  }
-
-  function addLists() {
-    setList((prevLists) => [
-      ...prevLists,
-      { key: lists.length + 1, note: inputValue },
-    ]); //inputValue was passed from the handlChange() when the event.target.value was inserted into setInputValue()
-    setInputValue(""); //act as an operator to pass the note inserted (inputValue) before storing the note into array 'lists'
-    console.log(lists);
-  }
+  const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
 
   function handleChange(event) {
-    const { name, value } = event.target;
-    setInputValue(value); //setInputValue(inputValue)
-
-    // setList((prevValue) => {
-    //   return [...prevValue, { note: value }];
-    // });
+    const newText = event.target.value; //no need to destructure into component since we dont need to use other property
+    setInputText(newText);
   }
 
-  function handleKey(event) {
-    // if (event.key === "Enter") {
-    //   addLists();
-    // }
-    return event.key === "Enter" ? addLists() : null; //extra feature added so that the note was added when the user press 'Enter'.
+  function addItems() {
+    //a function to add the 'inputText' into the array 'items'
+    setItems((prevValue) => {
+      return [...prevValue, inputText];
+    });
+    setInputText(""); //clear the input text once text was added
   }
-
   return (
     <div className="container">
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
       <div className="form">
-        <input
-          onKeyDown={handleKey}
-          value={inputValue}
-          //value was set so that we can clear the input placeholder after the note was added
-          onChange={handleChange}
-          type="text"
-        />
-        <button onClick={addLists}>
+        <input type="text" value={inputText} onChange={handleChange} />
+        <button onClick={addItems}>
           <span>Add</span>
         </button>
       </div>
-      {/* using mapping components technique to display note added like a forEach and for loop */}
-      {lists.map(createList)}
+      <div>
+        <ul>
+          {/* need to be in the {} since it is a javascript in html*/}
+          {items.map((item) => {
+            return <li>{item}</li>;
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
