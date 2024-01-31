@@ -5,11 +5,11 @@ function App() {
   const [inputText, setInputText] = useState("");
   const [items, setItems] = useState([]);
 
-  function createList(items) {
-    return <List key={items.key} value={items.note} />;
-    // key and value above was taken and used from when updating the items array using spread operator(...prevValue)
-    //{items.key} and {items.note} were passed to the List.jsx and utilise using props
-  }
+  // function createList(items) {
+  //   return <List key={items.key} value={items.note} />;
+  //   // key and value above was taken and used from when updating the items array using spread operator(...prevValue)
+  //   //{items.key} and {items.note} were passed to the List.jsx and utilise using props
+  // }
 
   function handleChange(event) {
     const newValue = event.target.value;
@@ -18,7 +18,8 @@ function App() {
 
   function addItem() {
     setItems((prevItems) => {
-      return [...prevItems, { key: items.length + 1, note: inputText }];
+      // return [...prevItems, { key: items.length + 1, note: inputText }];
+      return [...prevItems, inputText];
     });
     setInputText("");
   }
@@ -35,8 +36,13 @@ function App() {
         </button>
       </div>
       <div>
+        <ul>
+          {items.map((item) => (
+            <List note={item} />
+          ))}
+        </ul>
         {/* <ul> */}
-        {items.map(createList)}
+        {/* {items.map(createList)} */}
         {/* {items.map((todoItem) => (
             <li>{todoItem}</li>
           ))} */}
