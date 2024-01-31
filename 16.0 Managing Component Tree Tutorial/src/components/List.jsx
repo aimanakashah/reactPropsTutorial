@@ -1,16 +1,20 @@
-import React from "react";
-
-function crossNote(event) {
-  event.target.style.textDecoration = "line-through";
-  console.log(event);
-  //if I try method below, it will access multiple elements since every note is in the same class. thus cannot access the style of single element, (the note we want to line-through)
-  // document.getElementsByClassName("cross").style.textDecoration =
-  //   "line-through";
-}
+import React, { useState } from "react";
 
 function List(props) {
+  const [styles, setStyle] = useState(false); //cannot be called at the top level, need to be inside React function
+
+  function handleClick() {
+    // setStyle(true); //unlike below,  this method doesnt let you to reverse the action of the line-through
+    setStyle((prevValue) => {
+      return !prevValue;
+    });
+  }
+
   return (
-    <li className="cross" onClick={crossNote}>
+    <li
+      style={styles ? { textDecoration: "line-through" } : null}
+      onClick={handleClick}
+    >
       {props.note}
     </li>
   );
