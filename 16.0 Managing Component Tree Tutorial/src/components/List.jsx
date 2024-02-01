@@ -1,20 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
 function List(props) {
-  const [styles, setStyle] = useState(false); //cannot be called at the top level, need to be inside React function
-
-  function handleClick() {
-    // setStyle(true); //unlike below,  this method doesnt let you to reverse the action of the line-through
-    setStyle((prevValue) => {
-      return !prevValue;
-    });
-  }
-
   return (
     <li
-      style={styles ? { textDecoration: "line-through" } : null}
-      onClick={handleClick}
+      // the method of javascript will only pass the id when the note was clicked which is in a function. if said method has no function then it will auto passed the id
+      onClick={() => {
+        props.onChecked(props.id);
+      }}
     >
+      {/* //onChecked from App.jsx was passed as props and will only trigger when the element was clicked*/}
       {props.note}
     </li>
   );
