@@ -27,7 +27,7 @@ function CreateArea(props) {
       >
         <input
           onChange={handleChange}
-          value={inputList.inputTitle}
+          value={inputList.inputTitle} //passed as a property from within an object
           name="title"
           placeholder="Title"
         />

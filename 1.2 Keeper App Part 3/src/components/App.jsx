@@ -15,12 +15,27 @@ function App() {
     console.log(itemList);
   }
 
+  function deleteItem(id) {
+    setItemList((prevList) => {
+      return prevList.filter((item, index) => {
+        //the filter method creates new array
+        return index !== id;
+      });
+    });
+  }
+
   return (
     <div>
       <Header />
       <CreateArea onAdd={addItem} />
       {itemList.map((item, index) => (
-        <Note key={index} id={index} title={item.title} content={item.note} />
+        <Note
+          onDelete={deleteItem}
+          key={index}
+          id={index}
+          title={item.title}
+          content={item.note}
+        />
         //received the properties (title, note) from the itemList array first before passing as props to be display in Note.jsx
         //id={index} will be treated as props for said object even if it is not read in Note.jsx
       ))}
