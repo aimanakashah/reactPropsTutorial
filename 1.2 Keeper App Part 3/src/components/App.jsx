@@ -5,30 +5,26 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
-  const [titleList, setTitleList] = useState([]);
-  const [textList, setTextList] = useState([]);
+  const [itemList, setItemList] = useState([]); //declaring object, {titleList: "", textList: ""} in the state array of the function will be treated as one object with the key=0
 
-  function addItem(inputTitle, inputText) {
-    setTitleList((prevTitle) => {
-      // return [...prevTitle, { key: titleList.length, title: inputTitle }];
-      return [...prevTitle, inputTitle];
+  //parameter, (tajuk, textList) that was passed here when the button in CreateArea was clicked, CAN BE ANYTHING, BUT MUST RECEIVE BE IN THE RIGHT ORDER
+  function addItem(textList, tajuk) {
+    setItemList((prevItems) => {
+      return [...prevItems, { title: textList, note: tajuk }]; //the 'title', 'note' are the properties name that will be stored in the itemList array
     });
-    setTextList((prevText) => {
-      // return [...prevText, { key: textList.length + 1, content: inputText }];
-      return [...prevText, inputText];
-    });
-
-    // console.log(textList, titleList);
+    console.log(itemList);
   }
 
   return (
     <div>
       <Header />
       <CreateArea onAdd={addItem} />
-      {titleList.map((title, index) => (
-        <Note key={index} id={index} title={title} content="Note content" />
+      {itemList.map((item, index) => (
+        <Note key={index} id={index} title={item.title} content={item.note} />
+        //received the properties (title, note) from the itemList array first before passing as props to be display in Note.jsx
+        //id={index} will be treated as props for said object even if it is not read in Note.jsx
       ))}
-      {/* <Note title={titleList} content={textList} /> */}
+
       <Footer />
     </div>
   );
