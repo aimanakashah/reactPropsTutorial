@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 function InputArea(props) {
+  const [inputText, setInputText] = useState("");
+
+  function handleChange(event) {
+    const newValue = event.target.value;
+    setInputText(newValue);
+  }
+
   return (
     <div className="form">
-      <input type="text" onChange={props.change} value={props.text} />
+      <input onChange={handleChange} type="text" value={inputText} />
       <button
-        //1ST METHOD, useful method to pass additional data (props.id) to the 'add' function
-        // onClick={() => {
-        //   props.add(props.id);
-        // }}
-        //2ND METHOD
-        // onClick={props.add}
-        //3RD METHOD
         onClick={() => {
-          props.add(); //without the (), props.add is treated as reference instead of calling the function
+          props.onAdd(inputText);
+          setInputText(""); //in this onClick function, when the 'button' was clicked, it triggered the 'addItem' or 'onAdd', then the 'setInputText("")'
         }}
       >
         <span>Add</span>

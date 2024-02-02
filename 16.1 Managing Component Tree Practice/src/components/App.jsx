@@ -3,20 +3,13 @@ import ToDoItem from "./ToDoItem";
 import InputArea from "./InputArea";
 
 function App() {
-  const [inputText, setInputText] = useState("");
   const [items, setItems] = useState([]);
 
-  function handleChange(event) {
-    const newValue = event.target.value;
-    setInputText(newValue);
-    console.log(newValue);
-  }
-
-  function addItem() {
+  //inputText was passed as parameter from InputArea.jsx
+  function addItem(inputText) {
     setItems((prevItems) => {
       return [...prevItems, inputText];
     });
-    setInputText("");
   }
 
   function deleteItem(id) {
@@ -32,8 +25,7 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      {/* change, add, text will be passed as props into InputArea.jsx */}
-      <InputArea change={handleChange} add={addItem} text={inputText} />
+      <InputArea onAdd={addItem} />
       <div>
         <ul>
           {items.map((todoItem, index) => (
