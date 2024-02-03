@@ -5,21 +5,19 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
-  const [itemList, setItemList] = useState([]); //declaring object, {titleList: "", textList: ""} in the state array of the function will be treated as one object with the key=0
+  const [notes, setNotes] = useState([]);
 
-  //parameter, (tajuk, textList) that was passed here when the button in CreateArea was clicked, CAN BE ANYTHING, BUT MUST RECEIVE BE IN THE RIGHT ORDER
-  function addItem(textList, tajuk) {
-    setItemList((prevItems) => {
-      return [...prevItems, { title: textList, note: tajuk }]; //the 'title', 'note' are the properties name that will be stored in the itemList array
+  //parameter can be passed as a whole array after the prevNotes, no need mention each property name
+  function addNote(newNote) {
+    setNotes((prevNotes) => {
+      return [...prevNotes, newNote];
     });
-    console.log(itemList);
   }
 
-  function deleteItem(id) {
-    setItemList((prevList) => {
-      return prevList.filter((item, index) => {
-        //the filter method creates new array
-        return index !== id;
+  function deleteNote(id) {
+    setNotes((prevNotes) => {
+      return prevNotes.filter((noteItem, index) => {
+        return index !== id; //returning the index which is not the same with the id received, thus meaning the condition is true, if false(3 === 3), the filter method wont return
       });
     });
   }
@@ -27,19 +25,18 @@ function App() {
   return (
     <div>
       <Header />
-      <CreateArea onAdd={addItem} />
-      {itemList.map((item, index) => (
-        <Note
-          onDelete={deleteItem}
-          key={index}
-          id={index}
-          title={item.title}
-          content={item.note}
-        />
-        //received the properties (title, note) from the itemList array first before passing as props to be display in Note.jsx
-        //id={index} will be treated as props for said object even if it is not read in Note.jsx
-      ))}
-
+      <CreateArea onAdd={addNote} />
+      {notes.map((noteItem, index) => {
+        return (
+          <Note
+            key={index}
+            id={index}
+            title={noteItem.title}
+            content={noteItem.content}
+            onDelete={deleteNote}
+          />
+        );
+      })}
       <Footer />
     </div>
   );
